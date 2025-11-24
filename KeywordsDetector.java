@@ -27,7 +27,7 @@ public class KeywordsDetector {
             for (int i = 0; i < keywords.length; i++) {
                 String word = keywords[i].toLowerCase();
                 if (contains(sentence, word)) {
-                    System.out.println(sentence);
+                    System.out.println(sentences[j]);
                     break;
                 }
             }
