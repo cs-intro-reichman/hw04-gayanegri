@@ -12,7 +12,6 @@ public class ArrCharOps {
         System.out.println(indexOf(arr1,'l',3)); 
         System.out.println(lastIndexOf(arr1, 'l'));
         System.out.println(concat(arr1, arr2));
-        System.out.println(subArray(arr2, 2, 9));
         System.out.println(compareTo("abcd", "abcd"));
         System.out.println(compareTo("abc", "abcd"));
         System.out.println(compareTo("abw", "abcd"));
@@ -37,21 +36,37 @@ public class ArrCharOps {
      */
     public static char charAt(char[] arr, int index) {
         // Replace the following statement with your code
-        return 0;
+        return arr[index];
     }
 
     /** If the two arrays have the same value in every index, 
      *  returns true; Otherwise returns false.
      */
     public static boolean equals(char[] arr1, char[] arr2) {
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        int i = 0;
+        for (i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
         // Replace the following statement with your code
-        return false;
     }
 
     /** Returns the index within the given array of the first occurrence of the given character.
      *  If no such character is found, returns -1.
      */
     public static int indexOf(char[] arr, char ch) {
+        
+        int i = 0;
+        for (i = 0; i < arr.length && arr.length != 0; i++) {
+            if (ch == arr[i]) {
+                return i;
+            }
+        }
         // Replace the following statement with your code
         return -1;
     }
@@ -59,6 +74,12 @@ public class ArrCharOps {
     /** Same as indexOf(char[], char), but starts the search in the given index.
      */
     public static int indexOf(char[] arr, char ch, int fromIndex) {
+        while (fromIndex < arr.length && arr.length != 0) {
+            if (ch == arr[fromIndex]) {
+                return fromIndex;
+            }
+        fromIndex++;
+        }
         // Replace the following statement with your code
         return -1;
     }
@@ -67,6 +88,12 @@ public class ArrCharOps {
      *  If no such character is found, returns -1.
      */
     public static int lastIndexOf(char[] arr, char ch) {
+
+        for (int i = (arr.length - 1); i >= 0; i--) {
+            if (ch == arr[i]) {
+                return i;
+            }
+        }
         // Replace the following statement with your code
         return -1;
     }
@@ -74,8 +101,17 @@ public class ArrCharOps {
     /* Returns an array which is the concatanation of the two given arrays.
     */
     public static char[] concat(char[] arr1, char[] arr2) {
+        char[] arr3 = new char[arr1.length + arr2.length];
+        int i = 0;
+        for (i = 0; i < arr1.length; i++) {
+            arr3[i] = arr1[i];
+        }
+        int j = 0;
+        for (j = 0; j < arr2.length; j++, i++) {
+            arr3[i] = arr2[j];
+        }
         // Replace the following statement with your code
-        return null;
+        return arr3;
     }
 
     /** Returns a new array that can be described as a sub-array of this array.
@@ -84,8 +120,13 @@ public class ArrCharOps {
      *  characters containing the characters "urge".
      */     
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) {
+        char[] sub = new char[endIndex - beginIndex];
+        int j = 0;
+        for (int i = beginIndex; i < endIndex && arr.length != 0; i++, j++) {
+            sub[j] = arr[i];
+        }
         // Replace the following statement with your code
-        return null;
+        return sub;
     }
 
      /** Returns a single integer that represents the given array. This integer is sometimes 
@@ -96,8 +137,14 @@ public class ArrCharOps {
      *  The hash value of an empty array is zero.
      */
     public static long hashCode(char[] arr) {
+        int i = 0; 
+        int n = arr.length - 1;
+        long code = 0;
+        for (i = 0, n = arr.length - 1; n >= 0; n--, i++) {
+            code += (long) (arr[i] * Math.pow(7, n));
+        }
         // Replace the following statement with your code
-        return 0;
+        return code;
     }
 
     /**
@@ -126,7 +173,48 @@ public class ArrCharOps {
      *         return -2 if there is an error with the input.
      */
     public static int compareTo(String str1, String str2) {
+        if (str1.length() == 0 || str2.length() == 0) {
+            return -2;
+        }
+        
+        if (str1.length() == str2.length()) {
+            int i = 0;
+            for (i = 0; i < str1.length(); i++){
+                if (str1.charAt(i) != str2.charAt(i)) {
+                    break;
+                }
+            }
+            if (i == str1.length()) {
+                return 0;
+            } else { 
+                if (str1.charAt(i) < str2.charAt(i)) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        }
+
+        int small = Math.min(str1.length(), str2.length());
+        int i = 0;
+        for (i = 0; i < small; i++) {
+            if (str1.charAt(i) != str2.charAt(i)) {
+                break;
+            }
+        }
+        if (i == small) {
+            if (str1.length() < str2.length()) {
+                return -1; 
+            } else {
+                return 1;
+            }
+        }
+
+        if (str1.charAt(i) > str2.charAt(i)) {
+            return 1;
+        } else {
+            return -1;
+        }
         // Replace the following statement with your code
-        return 0;
     }
 }
